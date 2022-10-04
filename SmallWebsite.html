@@ -1,0 +1,53 @@
+<html>
+
+	<head>
+		<title>DSA's Small Website</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(function(){
+				$("#button").click(function(){
+					$('#results').empty();
+					$.ajax({
+						type: 'GET',
+						url: 'https://api.github.com/users/' + document.getElementById("gitHubName").value + '/repos',
+						data: { get_param: 'value'},
+						dataType: 'text',
+						success: function(data){
+							var json = $.parseJSON(data);
+							$('#results').append('<tbody><tr><th>Name</th><th>Description</th><th>Followers</th></tr>');
+
+							for (var i=0;i<json.length;++i) {
+								$('#results').append('<tr class="warning">'+'<td>'+json[i].name+'</td>'+'<td>'+json[i].description+'</td>'+'<td>'+json[i].stargazers_count+'</td>'+'</tr>');
+							}
+							$('#results').append('</tbody>');
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<center>
+			<img src="LogoUPC.png" width="192" height="51"></img>
+			<h2 class="text-primary">DSA's Small Website</h2>
+			<p>Marc Moran Monfort, 5M11.</p>
+		</center>
+
+		<h5>See the names of the repositories, their description, and the number of followers they have!</h5>
+		<label for="gitHubName">Introduce GitHub Username:</label><br>
+
+		<input type="text" id="gitHubName" value=""><br>
+		<input type="button" class="btn btn-primary" id="button" value="Check Information"><br>
+
+		<center>
+			<h4 class="text-primary">Repository's Info</h4>
+			<table id="results" class="table table-dark table-striped"></table>
+		</center>
+	</body>
+
+</html>
