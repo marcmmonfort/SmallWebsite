@@ -1,5 +1,7 @@
 <html>
 
+	<body style="background-color:rgb(192, 192, 192);">
+
 	<head>
 		<title>DSA's Small Website</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,11 +19,11 @@
 						data: { get_param: 'value'},
 						dataType: 'text',
 						success: function(data){
-							var json = $.parseJSON(data);
+							var Datos = $.parseJSON(data);
 							$('#results').append('<tbody><tr><th>Name</th><th>Description</th><th>Followers</th></tr>');
 
-							for (var i=0;i<json.length;++i) {
-								$('#results').append('<tr class="warning">'+'<td>'+json[i].name+'</td>'+'<td>'+json[i].description+'</td>'+'<td>'+json[i].stargazers_count+'</td>'+'</tr>');
+							for (var Rep=0;Rep<Datos.length;Rep=Rep+1) {
+								$('#results').append('<tr class="warning">'+'<td>'+Datos[Rep].name+'</td>'+'<td>'+Datos[Rep].description+'</td>'+'<td>'+Datos[Rep].stargazers_count+'</td>'+'</tr>');
 							}
 							$('#results').append('</tbody>');
 						}
@@ -39,10 +41,17 @@
 		</center>
 
 		<h5>See the names of the repositories, their description, and the number of followers they have!</h5>
-		<label for="gitHubName">Introduce GitHub Username:</label><br>
 
-		<input type="text" id="gitHubName" value=""><br>
-		<input type="button" class="btn btn-primary" id="button" value="Check Information"><br>
+		<p></p>
+
+		<center>
+			<label for="gitHubName">Introduce GitHub Username:</label><br>
+			<input type="text" id="gitHubName" value=""><br>
+			<p></p>
+			<input type="button" class="btn btn-dark" id="button" value="Check Information"><br>
+		</center>
+
+		<p></p>
 
 		<center>
 			<h4 class="text-primary">Repository's Info</h4>
